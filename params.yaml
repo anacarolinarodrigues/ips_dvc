@@ -1,4 +1,4 @@
 modelling:
-  n_neighbors: 5
-  weights: 'uniform'
-  algorithm: 'kd_tree'
+  n_neighbors: 4
+  weights: distance
+  algorithm: brute

@@ -47,13 +47,13 @@ stages:
       size: 854
     params:
       params.yaml:
-        modelling.algorithm: kd_tree
-        modelling.n_neighbors: 5
-        modelling.weights: uniform
+        modelling.algorithm: brute
+        modelling.n_neighbors: 4
+        modelling.weights: distance
     outs:
     - path: model/model.joblib
-      md5: 8c2b091a618b9c8a2f48373a5e52c3ef
-      size: 20480
+      md5: 12b98124dd3d5d78842901b7b7c11587
+      size: 9477
   evaluate:
     cmd: python src/evaluate.py
     deps:
@@ -64,18 +64,18 @@ stages:
       md5: ea38101cf40148e119ecc23570901ac0
       size: 23925
     - path: model/model.joblib
-      md5: 8c2b091a618b9c8a2f48373a5e52c3ef
-      size: 20480
+      md5: 12b98124dd3d5d78842901b7b7c11587
+      size: 9477
     - path: src/evaluate.py
       md5: 77918db505b097580a85e922afaa07a9
       size: 2528
     outs:
     - path: metrics/performance.json
-      md5: 471b12e8bc26038bb2673cd6b47ed2a2
-      size: 120
+      md5: 50ede23193df44ff7b485b15e1a3bd18
+      size: 151
     - path: metrics/test_roc.json
-      md5: 54340df27f2d6ffd22d01751a34d4a80
-      size: 219
+      md5: 964b84fb1aaea04d7b51fc7d3330e789
+      size: 340
     - path: metrics/train_roc.json
-      md5: c9d4e8e40c1c2bcba90e0bb2bd839c45
-      size: 146
+      md5: 532c25c14b4c231350240a7179d8e5e4
+      size: 268
