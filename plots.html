@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DVC Plot</title>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.10.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.8.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.5.1"></script>
+</head>
+<body>
+    <div id = "plot0"></div>
+<script type = "text/javascript">
+    var spec = {
+    "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+    "data": {
+        "values": [
+    {
+        "fpr": 0.0,
+        "rev": "workspace",
+        "thresholds": 1.4,
+        "tpr": 0.0
+    },
+    {
+        "fpr": 0.625,
+        "rev": "workspace",
+        "thresholds": 0.4,
+        "tpr": 1.0
+    },
+    {
+        "fpr": 1.0,
+        "rev": "workspace",
+        "thresholds": 0.0,
+        "tpr": 1.0
+    }
+]
+    },
+    "title": "",
+    "width": 300,
+    "height": 300,
+    "mark": {
+        "type": "line"
+    },
+    "encoding": {
+        "x": {
+            "field": "fpr",
+            "type": "quantitative",
+            "title": "fpr"
+        },
+        "y": {
+            "field": "tpr",
+            "type": "quantitative",
+            "title": "tpr",
+            "scale": {
+                "zero": false
+            }
+        },
+        "color": {
+            "field": "rev",
+            "type": "nominal"
+        }
+    }
+}
+;
+    vegaEmbed('#plot0', spec);
+</script>
+<div id = "plot1"></div>
+<script type = "text/javascript">
+    var spec = {
+    "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+    "data": {
+        "values": [
+    {
+        "fpr": 0.0,
+        "rev": "workspace",
+        "thresholds": 1.4,
+        "tpr": 0.0
+    },
+    {
+        "fpr": 0.5714285714285714,
+        "rev": "workspace",
+        "thresholds": 0.4,
+        "tpr": 1.0
+    },
+    {
+        "fpr": 0.7142857142857143,
+        "rev": "workspace",
+        "thresholds": 0.2,
+        "tpr": 1.0
+    },
+    {
+        "fpr": 1.0,
+        "rev": "workspace",
+        "thresholds": 0.0,
+        "tpr": 1.0
+    }
+]
+    },
+    "title": "",
+    "width": 300,
+    "height": 300,
+    "mark": {
+        "type": "line"
+    },
+    "encoding": {
+        "x": {
+            "field": "fpr",
+            "type": "quantitative",
+            "title": "fpr"
+        },
+        "y": {
+            "field": "tpr",
+            "type": "quantitative",
+            "title": "tpr",
+            "scale": {
+                "zero": false
+            }
+        },
+        "color": {
+            "field": "rev",
+            "type": "nominal"
+        }
+    }
+}
+;
+    vegaEmbed('#plot1', spec);
+</script>
+</body>
+</html>

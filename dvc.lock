@@ -1,0 +1,81 @@
+schema: '2.0'
+stages:
+  prepare_data:
+    cmd: python src/prepare_data.py
+    deps:
+    - path: data/raw
+      md5: a7e8c4fc850e8682e38c67ec474de949.dir
+      size: 75114059
+      nfiles: 45
+    - path: src/prepare_data.py
+      md5: 6a9b74ba6a5a269c734913c3cb4fed86
+      size: 1441
+    outs:
+    - path: data/processed/test.csv
+      md5: 63aff05652358d3022de7b315dcec54a
+      size: 1569
+    - path: data/processed/train.csv
+      md5: a351587b8f842323602d9ac3a7d54c9a
+      size: 1610
+  extract_features:
+    cmd: python src/extract_features.py
+    deps:
+    - path: data/processed/test.csv
+      md5: 63aff05652358d3022de7b315dcec54a
+      size: 1569
+    - path: data/processed/train.csv
+      md5: a351587b8f842323602d9ac3a7d54c9a
+      size: 1610
+    - path: src/extract_features.py
+      md5: a4cb439b8597b03d666dae4fce211ff7
+      size: 1841
+    outs:
+    - path: data/processed/testing_data.csv
+      md5: 896061be86369254176d23be71a13b37
+      size: 23840
+    - path: data/processed/training_data.csv
+      md5: ea38101cf40148e119ecc23570901ac0
+      size: 23925
+  modelling:
+    cmd: python src/modelling.py
+    deps:
+    - path: data/processed/training_data.csv
+      md5: ea38101cf40148e119ecc23570901ac0
+      size: 23925
+    - path: src/modelling.py
+      md5: 3894259570aacc8cda0c0b6efab5822e
+      size: 854
+    params:
+      params.yaml:
+        modelling.algorithm: kd_tree
+        modelling.n_neighbors: 5
+        modelling.weights: uniform
+    outs:
+    - path: model/model.joblib
+      md5: 8c2b091a618b9c8a2f48373a5e52c3ef
+      size: 20480
+  evaluate:
+    cmd: python src/evaluate.py
+    deps:
+    - path: data/processed/testing_data.csv
+      md5: 896061be86369254176d23be71a13b37
+      size: 23840
+    - path: data/processed/training_data.csv
+      md5: ea38101cf40148e119ecc23570901ac0
+      size: 23925
+    - path: model/model.joblib
+      md5: 8c2b091a618b9c8a2f48373a5e52c3ef
+      size: 20480
+    - path: src/evaluate.py
+      md5: 77918db505b097580a85e922afaa07a9
+      size: 2528
+    outs:
+    - path: metrics/performance.json
+      md5: 471b12e8bc26038bb2673cd6b47ed2a2
+      size: 120
+    - path: metrics/test_roc.json
+      md5: 54340df27f2d6ffd22d01751a34d4a80
+      size: 219
+    - path: metrics/train_roc.json
+      md5: c9d4e8e40c1c2bcba90e0bb2bd839c45
+      size: 146

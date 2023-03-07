@@ -1,0 +1,41 @@
+stages:
+  prepare_data:
+    cmd: python src/prepare_data.py
+    deps:
+    - data/raw
+    - src/prepare_data.py
+    outs:
+    - data/processed/test.csv
+    - data/processed/train.csv
+  extract_features:
+    cmd: python src/extract_features.py
+    deps:
+    - src/extract_features.py
+    - data/processed/test.csv
+    - data/processed/train.csv
+    outs:
+    - data/processed/testing_data.csv
+    - data/processed/training_data.csv
+  modelling:
+    cmd: python src/modelling.py
+    deps:
+    - src/modelling.py
+    - data/processed/training_data.csv
+    outs:
+    - model/model.joblib
+    params:
+    - modelling.n_neighbors
+    - modelling.weights
+    - modelling.algorithm
+  evaluate:
+    cmd: python src/evaluate.py
+    deps:
+    - src/evaluate.py
+    - model/model.joblib
+    - data/processed/testing_data.csv
+    - data/processed/training_data.csv
+    metrics:
+    - metrics/performance.json
+    plots:
+    - metrics/train_roc.json
+    - metrics/test_roc.json
