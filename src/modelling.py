@@ -1,7 +1,7 @@
 # train.py
 import numpy as np
 import pandas as pd
-from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
 from joblib import dump
 from pathlib import Path
 
@@ -18,9 +18,7 @@ def load_data(data_path):
 def main(repo_path):
 	train_csv_path = repo_path / "data/processed/training_data.csv"
 	X, y = load_data(train_csv_path)
-	neigh = KNeighborsClassifier(n_neighbors=params['n_neighbors'], 
-								 weights=params['weights'], 
-								 algorithm=params['algorithm'])
+	neigh = RandomForestClassifier(max_depth=params['max_depth'], random_state=0)
 	trained_model = neigh.fit(X, y)
 	dump(trained_model, repo_path / "model/model.joblib")
 

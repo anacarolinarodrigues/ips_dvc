@@ -1,4 +1,2 @@
 modelling:
-  n_neighbors: 5
-  weights: 'uniform'
-  algorithm: 'kd_tree'
+  max_depth: 5

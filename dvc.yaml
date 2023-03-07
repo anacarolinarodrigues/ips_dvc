@@ -24,9 +24,7 @@ stages:
     outs:
     - model/model.joblib
     params:
-    - modelling.n_neighbors
-    - modelling.weights
-    - modelling.algorithm
+    - modelling.max_depth
   evaluate:
     cmd: python src/evaluate.py
     deps:
